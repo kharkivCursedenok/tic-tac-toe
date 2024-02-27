@@ -57,52 +57,37 @@ void computerMove (const char computer)
 }
 bool checkWin (const char player)
 {
-	if (board[0] != ' ' && board[0] == board[1] && board[1] == board[2])
-	{
-		board[0] == player ? cout << "YOU WON!" : cout << "YOU LOSE!";
-	} else if (board[3] != ' ' && board[3] == board[4] && board[4] == board[5])
-	{
-		board[3] == player ? cout << "YOU WON!" : cout << "YOU LOSE!";
+	for (int i = 0; i < 3; ++i) {
+		if (board[i * 3] == player && board[i * 3 + 1] == player && board[i * 3 + 2] == player) {
+			std::cout << (player == 'X' ? "YOU WON!" : "YOU LOSE!");
+			return true;
+		}
 	}
-	else if (board[6] != ' ' && board[6] == board[7] && board[7] == board[8])
-	{
-		board[6] == player ? cout << "YOU WON!" : cout << "YOU LOSE!";
+
+	for (int i = 0; i < 3; ++i) {
+		if (board[i] == player && board[i + 3] == player && board[i + 6] == player) {
+			std::cout << (player == 'X' ? "YOU WON!" : "YOU LOSE!");
+			return true;
+		}
 	}
-	else if (board[1] != ' ' && board[1] == board[4] && board[4] == board[7])
-	{
-		board[1] == player ? cout << "YOU WON!" : cout << "YOU LOSE!";
+
+	if ((board[0] == player && board[4] == player && board[8] == player) ||
+		(board[2] == player && board[4] == player && board[6] == player)) {
+		std::cout << (player == 'X' ? "YOU WON!" : "YOU LOSE!");
+		return true;
 	}
-	else if (board[0] != ' ' && board[0] == board[3] && board[3] == board[6])
-	{
-		board[0] == player ? cout << "YOU WON!" : cout << "YOU LOSE!";
-	}
-	else if (board[2] != ' ' && board[2] == board[5] && board[5] == board[8])
-	{
-		board[2] == player ? cout << "YOU WON!" : cout << "YOU LOSE!";
-	}
-	else if (board[0] != ' ' && board[0] == board[4] && board[4] == board[8])
-	{
-		board[0] == player ? cout << "YOU WON!" : cout << "YOU LOSE!";
-	}
-	else if (board[2] != ' ' && board[2] == board[4] && board[4] == board[6])
-	{
-		board[2] == player ? cout << "YOU WON!" : cout << "YOU LOSE!";
-	} else
-	{
-		return false;
-	}
-	return true;
+
+	return false;
 }
 bool checkTie()
 {
 	for (int i = 0; i < 9; i++)
 	{
-		if(board[i] == ' ')
+		if (board[i] == ' ')
 		{
 			return false;
-			break;
 		}
-	} 
+	}
 	cout << "It`s a tie!" << endl;
 	return true;
 }
